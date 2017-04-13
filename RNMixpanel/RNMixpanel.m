@@ -25,6 +25,8 @@ RCT_EXPORT_MODULE(RNMixpanel)
 RCT_EXPORT_METHOD(sharedInstanceWithToken:(NSString *)apiToken) {
     [Mixpanel sharedInstanceWithToken:apiToken];
     mixpanel = [Mixpanel sharedInstance];
+    mixpanel.showNotificationOnActive = NO;
+    mixpanel.checkForNotificationsOnActive = NO;
     // React Native runs too late to listen for applicationDidBecomeActive,
     // so we expose the private method and call it explicitly here,
     // to ensure that important things like initializing the flush timer and
@@ -132,6 +134,10 @@ RCT_EXPORT_METHOD(trackChargeWithProperties:(nonnull NSNumber *)charge propertie
 // increment
 RCT_EXPORT_METHOD(increment:(NSString *)property count:(nonnull NSNumber *)count) {
     [mixpanel.people increment:property by:count];
+}
+
+RCT_EXPORT_METHOD(showNotification) {
+    [mixpanel showNotification];
 }
 
 // reset
