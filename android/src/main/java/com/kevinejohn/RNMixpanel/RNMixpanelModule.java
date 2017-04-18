@@ -229,6 +229,11 @@ public class RNMixpanelModule extends ReactContextBaseJavaModule implements Life
     }
 
     @ReactMethod
+    public void showNotification() {
+        mixpanel.getPeople().showNotificationIfAvailable(getCurrentActivity());
+    }
+
+    @ReactMethod
     public void reset() {
         mixpanel.reset();
         mixpanel.flush();
